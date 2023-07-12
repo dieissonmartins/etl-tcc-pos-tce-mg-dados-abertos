@@ -19,4 +19,11 @@ s3 = boto3.client(service,
 # list buckets
 buckets = s3.list_buckets()
 
-done = True
+bucket_names = buckets['Buckets']
+print(bucket_names)
+
+# create new bucket
+#new_bucket = s3.create_bucket(Bucket='bucker-by-boto3')
+
+# delete bucket
+#delete_bucket = s3.delete_bucket(Bucket='bucker-by-boto3')
