@@ -1,6 +1,8 @@
 import boto3
 from dotenv import load_dotenv
 import os
+import logging
+from pathlib import Path
 
 # load envs
 load_dotenv()
@@ -20,10 +22,28 @@ s3 = boto3.client(service,
 buckets = s3.list_buckets()
 
 bucket_names = buckets['Buckets']
-print(bucket_names)
+# print(bucket_names)
 
 # create new bucket
-#new_bucket = s3.create_bucket(Bucket='bucker-by-boto3')
+# new_bucket = s3.create_bucket(Bucket='bucker-by-boto3')
 
 # delete bucket
-#delete_bucket = s3.delete_bucket(Bucket='bucker-by-boto3')
+# delete_bucket = s3.delete_bucket(Bucket='bucker-by-boto3')
+
+local_path = os.path.dirname(os.path.realpath(__file__))
+path = os.path.join(local_path, 'tmp')
+
+# create dir
+os.mkdir(path)
+
+# info
+logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
+logging.info('Baixando arquivo...')
+
+# download file
+file = s3.download_file(Bucket='testsdataeng', Key='tcemg/2022.zip', Filename='tmp/2022.zip')
+
+#try:
+#    pass
+#except:
+#    logging.error("not donwload file")
