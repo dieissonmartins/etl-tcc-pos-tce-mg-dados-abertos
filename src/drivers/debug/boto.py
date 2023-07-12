@@ -2,7 +2,6 @@ import boto3
 from dotenv import load_dotenv
 import os
 import logging
-from pathlib import Path
 
 # load envs
 load_dotenv()
