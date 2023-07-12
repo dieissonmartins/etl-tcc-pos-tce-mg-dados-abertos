@@ -34,16 +34,17 @@ local_path = os.path.dirname(os.path.realpath(__file__))
 path = os.path.join(local_path, 'tmp')
 
 # create dir
-os.mkdir(path)
+try:
+    os.mkdir(path)
+except OSError as error:
+    logging.error("not create dir")
 
 # info
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 logging.info('Baixando arquivo...')
 
 # download file
-file = s3.download_file(Bucket='testsdataeng', Key='tcemg/2022.zip', Filename='tmp/2022.zip')
-
-#try:
-#    pass
-#except:
-#    logging.error("not donwload file")
+try:
+    file = s3.download_file(Bucket='testsdataeng', Key='tcemg/2022.zip', Filename='tmp/2022.zip')
+except:
+    logging.error("not donwload file")
