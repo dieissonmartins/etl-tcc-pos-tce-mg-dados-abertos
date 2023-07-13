@@ -3,7 +3,9 @@ from src.drivers.storage import Storage
 # connect storage by s3
 storage = Storage()
 
-buckets = storage.list_buckets()
+file_zip = storage.get_object('testsdataeng', 'tcemg/2022.zip')
 
-bucket_names = buckets['Buckets']
-
+if file_zip:
+    print('file exists')
+else:
+    print('file not exists')

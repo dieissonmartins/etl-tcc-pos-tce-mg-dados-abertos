@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Dict, Any
 
 import boto3
 from dotenv import load_dotenv
@@ -33,3 +33,11 @@ class Storage(StorageInterface):
     def list_buckets(self) -> Dict[str, str | int]:
         buckets = self.__storage.list_buckets()
         return buckets
+
+    def get_object(self, bucket, path) -> Any:
+        try:
+            object_file = self.__storage.get_object(Bucket=bucket, Key=path)
+            return object_file
+
+        except Exception:
+            return False
