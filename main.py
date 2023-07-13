@@ -7,4 +7,3 @@ buckets = storage.list_buckets()
 
 bucket_names = buckets['Buckets']
 
-print(bucket_names)
