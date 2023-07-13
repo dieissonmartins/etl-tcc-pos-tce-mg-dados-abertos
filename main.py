@@ -1,11 +1,14 @@
 from src.drivers.storage import Storage
 
-# connect storage by s3
-storage = Storage()
+# entry point
+if __name__ == '__main__':
 
-file_zip = storage.get_object('testsdataeng', 'tcemg/2022.zip')
+    # connect storage by s3
+    storage = Storage()
 
-if file_zip:
-    print('file exists')
-else:
-    print('file not exists')
+    # get file
+    file_zip = storage.get_object('testsdataeng', 'tcemg/22.zip')
+
+    # if not file
+    if not file_zip:
+        print('file not exists')
