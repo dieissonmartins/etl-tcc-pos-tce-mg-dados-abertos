@@ -1,5 +1,6 @@
 import os
 from abc import ABC
+from typing import Dict
 
 import boto3
 from dotenv import load_dotenv
@@ -8,20 +9,16 @@ from src.drivers.interfaces.storage_interface import StorageInterface
 
 
 class Storage(StorageInterface, ABC):
-    __bucket: boto3
+    __storage: boto3
 
     def __init__(self) -> None:
         # load envs
         load_dotenv()
 
-        self.__bucket = self.connect_buckets()
+        self.__storage = self.connect()
 
     @property
-    def connect_buckets(self) -> boto3:
-
-        # load envs
-        load_dotenv()
-
+    def connect(self) -> boto3:
         service = os.getenv("STORAGE")
         region_name = os.getenv("AWS_DEFAULT_REGION")
         aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
@@ -34,3 +31,10 @@ class Storage(StorageInterface, ABC):
                           aws_secret_access_key=aws_secret_access_key)
 
         return s3
+
+    @property
+    def list_buckets(self) -> Dict[str, str | int]:
+
+        buckets = self.__storage.list_buckets
+
+        return buckets
