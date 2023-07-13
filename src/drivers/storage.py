@@ -31,10 +31,3 @@ class Storage(StorageInterface, ABC):
                           aws_secret_access_key=aws_secret_access_key)
 
         return s3
-
-    @property
-    def list_buckets(self) -> Dict[str, str | int]:
-
-        buckets = self.__storage.list_buckets
-
-        return buckets
