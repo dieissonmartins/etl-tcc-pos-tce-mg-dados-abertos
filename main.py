@@ -1,6 +1,8 @@
 from src.drivers.storage import Storage
 import logging
 
+from src.drivers.zipfile import FileZip
+
 # entry point
 if __name__ == '__main__':
 
@@ -28,3 +30,10 @@ if __name__ == '__main__':
             file = storage.download_file(bucket, path_storage, path_local)
         else:
             logging.info('Arquivo .zip ja exite')
+
+            file_zip = FileZip()
+
+            is_extract = file_zip.extract_file(path_local)
+
+            if is_extract:
+                logging.info('Arquivos extraidos')
