@@ -2,6 +2,7 @@ import os
 from zipfile36 import ZipFile
 import logging
 
+
 class FileZip:
 
     def extract_file(self, path):
@@ -18,10 +19,12 @@ class FileZip:
             # list fields
             for fl in files:
 
-                if fl.startswith('2022/3100401/'):
+                if fl.startswith('2022/3100401/') and fl.endswith('.csv'):
 
                     # extract file
                     extract_path = file.extract(fl, path=local_path + '/tmp/')
 
                     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
                     logging.info('Extraindo arquivo ' + extract_path)
+
+                    folder_arr = extract_path.split("/")
