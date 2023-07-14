@@ -32,7 +32,6 @@ if __name__ == '__main__':
             logging.info('Arquivo .zip ja exite')
 
             file_zip = FileZip()
-
             is_extract = file_zip.extract_file(path_local)
 
             if is_extract:
