@@ -1,7 +1,7 @@
 import os
 from zipfile36 import ZipFile
 import logging
-
+import uuid
 
 class FileZip:
 
@@ -16,15 +16,27 @@ class FileZip:
             # get the list of files and print it
             files = file.namelist()
 
+            aux = {}
+
             # list fields
             for fl in files:
 
                 if fl.startswith('2022/3100401/') and fl.endswith('.csv'):
-
                     # extract file
                     extract_path = file.extract(fl, path=local_path + '/tmp/')
 
                     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
                     logging.info('Extraindo arquivo ' + extract_path)
 
-                    folder_arr = extract_path.split("/")
+                    folder_arr = fl.split("/")
+
+                    entity_key = str(folder_arr[1])
+
+                    if entity_key in aux:
+                        aux[entity_key].append(fl)
+                    else:
+                        aux[entity_key] = [fl]
+
+        entities = aux
+
+        return entities
