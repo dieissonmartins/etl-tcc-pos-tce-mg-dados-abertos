@@ -2,6 +2,7 @@ from src.drivers.storage import Storage
 import logging
 
 from src.drivers.zipfile import FileZip
+from src.process.process_entities import ProcessEntities
 
 # entry point
 if __name__ == '__main__':
@@ -11,9 +12,10 @@ if __name__ == '__main__':
     # connect storage by s3
     storage = Storage()
 
+    year = 2022
     bucket = 'testsdataeng'
-    path_storage = 'tcemg/2022.zip'
-    path_local = 'tmp/2022.zip'
+    path_storage = 'tcemg/' + str(year) + '.zip'
+    path_local = 'tmp/' + str(year) + '.zip'
 
     # get file
     file_zip = storage.get_object(bucket, path_storage)
@@ -33,3 +35,6 @@ if __name__ == '__main__':
 
             file_zip = FileZip()
             entities = file_zip.extract_file(path_local)
+
+            process = ProcessEntities()
+            process.run(entities, year)
