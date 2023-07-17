@@ -20,6 +20,6 @@ class ExtractOrgaos:
         if not check_file:
             return []
 
-        df = pd.read_csv(file)
+        df = pd.read_csv(file, header=0, sep='\t')
 
         print(df.to_string())
