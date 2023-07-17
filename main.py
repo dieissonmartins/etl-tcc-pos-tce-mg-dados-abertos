@@ -37,4 +37,4 @@ if __name__ == '__main__':
             entities = file_zip.extract_file(path_local)
 
             process = ProcessEntities()
-            process.run(entities, year)
+            process.run(entities)
