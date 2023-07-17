@@ -1,3 +1,5 @@
+import os
+
 from src.drivers.storage import Storage
 import logging
 
@@ -36,5 +38,7 @@ if __name__ == '__main__':
             file_zip = FileZip()
             entities = file_zip.extract_file(path_local)
 
-            process = ProcessEntities()
+            path = os.path.dirname(os.path.realpath(__file__))
+
+            process = ProcessEntities(path)
             process.run(entities)
