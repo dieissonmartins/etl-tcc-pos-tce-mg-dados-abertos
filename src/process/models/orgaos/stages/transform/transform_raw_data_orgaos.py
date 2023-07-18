@@ -7,12 +7,21 @@ class TransformRawDataOrgaos:
         return ret
 
     def __filter_and_transform_data(self, data_content) -> List[Dict]:
-        aux = {}
+        aux = []
 
-        for data in data_content.items():
-            debug = data
+        for row in data_content:
 
-            debug2 = ''
+            seq_orgao = int(row['seq_orgao'])
+            num_anoexercicio = int(row['num_anoexercicio'])
+            cod_orgao = int(row['cod_orgao'])
+
+            row = {
+                'seq_orgao': seq_orgao,
+                'num_anoexercicio': num_anoexercicio,
+                'cod_orgao': cod_orgao,
+            }
+
+            aux.append(row)
 
         ret = aux
 
