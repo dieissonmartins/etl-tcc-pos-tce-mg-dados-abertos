@@ -35,6 +35,6 @@ class ExtractOrgaos:
 
         df = pd.read_csv(file, header=0, names=col_names, sep=';')
 
-        rows = df.to_dict()
+        rows = df.to_dict(orient='records')
 
         return rows

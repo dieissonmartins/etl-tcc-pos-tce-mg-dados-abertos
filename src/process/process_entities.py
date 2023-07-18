@@ -1,6 +1,7 @@
 import os
 
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
+from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
 
 
 class ProcessEntities:
@@ -16,11 +17,8 @@ class ProcessEntities:
                 self.pipeline_orgaos(file_path)
 
     def pipeline_orgaos(self, file_path):
-
         file_path_arr = file_path.split("/")
-
         model = file_path_arr[3].split(".")[3]
-
         entity_id = file_path_arr[1]
 
         if not model == 'orgao':
@@ -29,7 +27,7 @@ class ProcessEntities:
         extract_orgaos = ExtractOrgaos(self.__path, file_path, model, entity_id)
         extract_html_data = extract_orgaos.extract()
 
-        
-        extract_html_data = extract_orgaos.extract()
+        transform_raw_data = TransformRawDataOrgaos()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
 
-        teste = extract_html_data
+        teste = transform_html_data
