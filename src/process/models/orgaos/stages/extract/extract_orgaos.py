@@ -20,6 +20,21 @@ class ExtractOrgaos:
         if not check_file:
             return []
 
-        df = pd.read_csv(file, header=0, sep='\t')
+        col_names = ["seq_orgao",
+                     "num_anoexercicio",
+                     "cod_orgao",
+                     "nom_orgao",
+                     "tipo_orgao",
+                     "cod_municipio",
+                     "nom_municipio",
+                     "cod_uf",
+                     "sgl_uf",
+                     "nom_uf",
+                     "dsc_regiaoplanejamento",
+                     "num_versao_arq"]
 
-        print(df.to_string())
+        df = pd.read_csv(file, header=0, names=col_names, sep=';')
+
+        rows = df.to_dict()
+
+        return rows

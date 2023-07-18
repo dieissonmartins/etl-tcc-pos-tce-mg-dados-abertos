@@ -19,12 +19,15 @@ class ProcessEntities:
 
         file_path_arr = file_path.split("/")
 
-        model = file_path_arr[2]
+        model = file_path_arr[3].split(".")[3]
+
         entity_id = file_path_arr[1]
 
-        if not model == 'saude':
+        if not model == 'orgao':
             return
 
         extract_orgaos = ExtractOrgaos(self.__path, file_path, model, entity_id)
 
         extract_html_data = extract_orgaos.extract()
+
+        teste = extract_html_data
