@@ -1,5 +1,5 @@
 import os
-from typing import Any
+from typing import Any, Dict
 import pandas as pd
 
 
@@ -12,13 +12,13 @@ class ExtractOrgaos:
         self.__entity_id = entity_id
         self.__file = self.__path + '/src/drivers/tmp/' + self.__file_path
 
-    def extract(self) -> Any:
+    def extract(self) -> Dict:
         file = self.__file
 
         check_file = os.path.isfile(file)
 
         if not check_file:
-            return []
+            return {}
 
         col_names = ["seq_orgao",
                      "num_anoexercicio",

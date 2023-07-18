@@ -27,7 +27,9 @@ class ProcessEntities:
             return
 
         extract_orgaos = ExtractOrgaos(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_orgaos.extract()
 
+        
         extract_html_data = extract_orgaos.extract()
 
         teste = extract_html_data
