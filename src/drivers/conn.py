@@ -13,7 +13,7 @@ class Conn:
         # load envs
         load_dotenv()
 
-        self.__conn = self.connect()
+        # elf.__conn = self.connect()
 
     def connect(self) -> Any:
         logging.info('Conecta no banco de dados')
@@ -25,9 +25,7 @@ class Conn:
 
         conn = connector.connect(user=user, password=password, host=host, database=database)
 
-        cursor = conn.cursor()
-
-        return cursor
+        return conn
 
     def get_conn(self):
         return self.__conn
