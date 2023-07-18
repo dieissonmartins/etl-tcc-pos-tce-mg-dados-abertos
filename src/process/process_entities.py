@@ -1,6 +1,7 @@
 import os
 
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
+from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
 
 
@@ -30,4 +31,5 @@ class ProcessEntities:
         transform_raw_data = TransformRawDataOrgaos()
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
-        teste = transform_html_data
+        load_data = LoadDataOrgaos()
+        load_data.load(transform_html_data)
