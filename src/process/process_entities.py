@@ -1,3 +1,4 @@
+from src.process.models.despesas.stages.extract.extract_despesas import ExtractDespesas
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
@@ -30,7 +31,10 @@ class ProcessEntities:
                 # self.pipeline_orgaos(file_path, model, entity_id)
 
                 # etl receitas
-                self.pipeline_receitas(file_path, model, entity_id)
+                # self.pipeline_receitas(file_path, model, entity_id)
+
+                # etl despesas
+                self.pipeline_despesas(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
@@ -66,3 +70,13 @@ class ProcessEntities:
 
         load_data = LoadDataReceitas(self.__conn)
         load_data.load(transform_html_data, self.__year)
+
+    def pipeline_despesas(self, file_path, model, entity_id):
+
+        if not model == 'despesa':
+            return
+
+        logging.info('Início processar: ' + model)
+
+        extract_despesas = ExtractDespesas(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_despesas.extract()
