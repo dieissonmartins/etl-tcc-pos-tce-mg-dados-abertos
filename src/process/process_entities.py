@@ -1,10 +1,10 @@
-import os
-
-from src.process.models.orgaos.stages.extract.extract_receitas import ExtractOrgaos
+from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
 from src.drivers.conn import Conn
 import logging
+
+from src.process.models.receitas.stages.extract.extract_receitas import ExtractReceitas
 
 
 class ProcessEntities:
@@ -24,7 +24,7 @@ class ProcessEntities:
                 entity_id = file_path_arr[1]
 
                 # etl orgaos
-                self.pipeline_orgaos(file_path, model, entity_id)
+                # self.pipeline_orgaos(file_path, model, entity_id)
 
                 # etl receitas
                 self.pipeline_receitas(file_path, model, entity_id)
@@ -54,3 +54,6 @@ class ProcessEntities:
             return
 
         logging.info('Início processar: ' + model)
+
+        extract_receitas = ExtractReceitas(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_receitas.extract()
