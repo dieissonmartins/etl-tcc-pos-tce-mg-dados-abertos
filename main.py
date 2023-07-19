@@ -40,5 +40,5 @@ if __name__ == '__main__':
 
             path = os.path.dirname(os.path.realpath(__file__))
 
-            process = ProcessEntities(path)
+            process = ProcessEntities(path, year)
             process.run(entities)

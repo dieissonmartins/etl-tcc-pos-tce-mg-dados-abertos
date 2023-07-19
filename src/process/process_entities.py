@@ -5,13 +5,15 @@ from src.drivers.conn import Conn
 import logging
 
 from src.process.models.receitas.stages.extract.extract_receitas import ExtractReceitas
+from src.process.models.receitas.stages.load.load_data_receitas import LoadDataReceitas
 from src.process.models.receitas.stages.transform.transform_raw_data_receitas import TransformRawDataReceitas
 
 
 class ProcessEntities:
 
-    def __init__(self, path) -> None:
+    def __init__(self, path, year) -> None:
         self.__path = path
+        self.__year = year
 
         conn = Conn()
         self.__conn = conn.connect()
@@ -61,3 +63,6 @@ class ProcessEntities:
 
         transform_raw_data = TransformRawDataReceitas()
         transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataReceitas(self.__conn)
+        load_data.load(transform_html_data, self.__year)
