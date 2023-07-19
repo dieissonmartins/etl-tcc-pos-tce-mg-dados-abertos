@@ -5,6 +5,7 @@ from src.drivers.conn import Conn
 import logging
 
 from src.process.models.receitas.stages.extract.extract_receitas import ExtractReceitas
+from src.process.models.receitas.stages.transform.transform_raw_data_receitas import TransformRawDataReceitas
 
 
 class ProcessEntities:
@@ -57,3 +58,6 @@ class ProcessEntities:
 
         extract_receitas = ExtractReceitas(self.__path, file_path, model, entity_id)
         extract_html_data = extract_receitas.extract()
+
+        transform_raw_data = TransformRawDataReceitas()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
