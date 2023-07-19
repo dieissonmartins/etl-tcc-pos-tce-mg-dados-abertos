@@ -1,6 +1,6 @@
 import os
 
-from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
+from src.process.models.orgaos.stages.extract.extract_receitas import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
 from src.drivers.conn import Conn
@@ -26,6 +26,9 @@ class ProcessEntities:
                 # etl orgaos
                 self.pipeline_orgaos(file_path, model, entity_id)
 
+                # etl receitas
+                self.pipeline_receitas(file_path, model, entity_id)
+
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
 
@@ -44,3 +47,10 @@ class ProcessEntities:
 
         load_data = LoadDataOrgaos(self.__conn)
         load_data.load(transform_html_data)
+
+    def pipeline_receitas(self, file_path, model, entity_id):
+
+        if not model == 'receita':
+            return
+
+        logging.info('Início processar: ' + model)
