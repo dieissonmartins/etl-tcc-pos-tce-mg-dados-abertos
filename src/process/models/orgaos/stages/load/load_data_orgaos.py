@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+
 from src.drivers.conn import Conn
 
 
@@ -14,12 +16,13 @@ class LoadDataOrgaos:
 
             orgao = self.get_orgao(row)
 
-            if orgao:
-                print('atualiza')
+            if not orgao:
+                self.create_orgao(row)
             else:
                 print('não existe')
 
     def get_orgao(self, row):
+
         cursor = self.__conn.cursor()
 
         seq_orgao = row['seq_orgao']
@@ -32,8 +35,35 @@ class LoadDataOrgaos:
 
         smpt = cursor.execute(query, where)
 
-        orgao = cursor.fetch()
+        return cursor.fetchone()
 
-        debug = orgao
+    def create_orgao(self, row):
 
-        return orgao
+        cursor = self.__conn.cursor()
+
+        seq_orgao = row['seq_orgao']
+        num_anoexercicio = row['num_anoexercicio']
+        cod_orgao = row['cod_orgao']
+        nom_orgao = row['nom_orgao']
+        tipo_orgao = row['tipo_orgao']
+        cod_municipio = row['cod_municipio']
+        nom_municipio = row['nom_municipio']
+        cod_uf = row['cod_uf']
+        sgl_uf = row['sgl_uf']
+        nom_uf = row['nom_uf']
+        dsc_regiaoplanejamento = row['dsc_regiaoplanejamento']
+        num_versao_arq = row['num_versao_arq']
+        created_at = datetime.now()
+        updated_at = datetime.now()
+
+        query = "INSERT INTO orgaos (seq_orgao, num_anoexercicio, cod_orgao, nom_orgao, tipo_orgao, cod_municipio," \
+                "nom_municipio, cod_uf, sgl_uf, nom_uf, dsc_regiaoplanejamento, num_versao_arq, created_at, updated_at)" \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+        values = (
+            seq_orgao, num_anoexercicio, cod_orgao, nom_orgao, tipo_orgao, cod_municipio, nom_municipio, cod_uf, sgl_uf,
+            nom_uf, dsc_regiaoplanejamento, num_versao_arq, created_at, updated_at)
+
+        cursor.execute(query, values)
+
+        self.__conn.commit()
