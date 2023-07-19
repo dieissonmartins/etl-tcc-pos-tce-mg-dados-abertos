@@ -4,7 +4,7 @@ from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgao
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
 from src.drivers.conn import Conn
-
+import logging
 
 class ProcessEntities:
 
@@ -19,13 +19,19 @@ class ProcessEntities:
                 # etl orgaos
                 self.pipeline_orgaos(file_path)
 
+        # TODO: matar conn banco de dados
+        # self.__conn.connect.close()
+
     def pipeline_orgaos(self, file_path):
         file_path_arr = file_path.split("/")
         model = file_path_arr[3].split(".")[3]
         entity_id = file_path_arr[1]
 
+
         if not model == 'orgao':
             return
+
+        logging.info('Início processar: ' + model)
 
         extract_orgaos = ExtractOrgaos(self.__path, file_path, model, entity_id)
         extract_html_data = extract_orgaos.extract()

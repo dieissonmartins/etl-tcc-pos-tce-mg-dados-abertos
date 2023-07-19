@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import logging
 
 
 class LoadDataOrgaos:
@@ -8,16 +9,23 @@ class LoadDataOrgaos:
         self.__conn = conn.connect()
 
     def load(self, transform_html_data):
+
+        logging.info('load orgão')
+
         for row in transform_html_data:
 
             orgao = self.get_orgao(row)
 
             if not orgao:
+                logging.info('Importa novo orgão')
                 self.create_orgao(row)
             else:
+                logging.info('Atualiza orgão: ' + str(row['seq_orgao']))
                 print('não existe')
 
     def get_orgao(self, row):
+
+        logging.info('Verifica se orgão existe')
 
         cursor = self.__conn.cursor()
 

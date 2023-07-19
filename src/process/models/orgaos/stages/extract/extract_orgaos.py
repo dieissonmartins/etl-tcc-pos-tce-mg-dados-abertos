@@ -1,7 +1,7 @@
 import os
 from typing import Any, Dict
 import pandas as pd
-
+import logging
 
 class ExtractOrgaos:
 
@@ -13,6 +13,9 @@ class ExtractOrgaos:
         self.__file = self.__path + '/src/drivers/tmp/' + self.__file_path
 
     def extract(self) -> Dict:
+
+        logging.info('Extrai orgão')
+
         file = self.__file
 
         check_file = os.path.isfile(file)

@@ -1,8 +1,11 @@
 from typing import List, Dict
-
+import logging
 
 class TransformRawDataOrgaos:
     def transform(self, extract_data):
+
+        logging.info('Transforma orgão')
+
         ret = self.__filter_and_transform_data(extract_data)
         return ret
 
