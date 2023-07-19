@@ -19,16 +19,17 @@ class ProcessEntities:
         for files_path in entities.values():
 
             for file_path in files_path:
+                file_path_arr = file_path.split("/")
+                model = file_path_arr[3].split(".")[3]
+                entity_id = file_path_arr[1]
+
                 # etl orgaos
-                self.pipeline_orgaos(file_path)
+                self.pipeline_orgaos(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
 
-    def pipeline_orgaos(self, file_path):
-        file_path_arr = file_path.split("/")
-        model = file_path_arr[3].split(".")[3]
-        entity_id = file_path_arr[1]
+    def pipeline_orgaos(self, file_path, model, entity_id):
 
         if not model == 'orgao':
             return
