@@ -20,8 +20,7 @@ class LoadDataOrgaos:
                 logging.info('Importa novo orgão')
                 self.create_orgao(row)
             else:
-                logging.info('Atualiza orgão: ' + str(row['seq_orgao']))
-                print('não existe')
+                logging.info('Orgão ja existe não importar: ' + str(row['seq_orgao']))
 
     def get_orgao(self, row):
 

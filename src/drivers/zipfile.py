@@ -21,7 +21,7 @@ class FileZip:
             # list fields
             for fl in files:
 
-                if fl.startswith('2022/3100401/') and fl.endswith('.csv'):
+                if fl.endswith('.csv'):
                     # extract file
                     extract_path = file.extract(fl, path=local_path + '/tmp/')
 
