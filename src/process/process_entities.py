@@ -3,12 +3,14 @@ import os
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
+from src.drivers.conn import Conn
 
 
 class ProcessEntities:
 
     def __init__(self, path) -> None:
         self.__path = path
+        self.__conn = Conn()
 
     def run(self, entities):
         for files_path in entities.values():
@@ -31,5 +33,5 @@ class ProcessEntities:
         transform_raw_data = TransformRawDataOrgaos()
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
-        load_data = LoadDataOrgaos()
+        load_data = LoadDataOrgaos(self.__conn)
         load_data.load(transform_html_data)

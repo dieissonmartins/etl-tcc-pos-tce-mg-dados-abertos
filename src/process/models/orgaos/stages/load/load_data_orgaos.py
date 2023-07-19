@@ -1,14 +1,10 @@
 import os
 from datetime import datetime
 
-from src.drivers.conn import Conn
-
 
 class LoadDataOrgaos:
-    def __init__(self) -> None:
+    def __init__(self, conn) -> None:
         self.__path = os.path.dirname(os.path.realpath(__file__))
-
-        conn = Conn()
         self.__conn = conn.connect()
 
     def load(self, transform_html_data):
