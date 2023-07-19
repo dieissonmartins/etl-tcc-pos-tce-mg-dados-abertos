@@ -6,11 +6,14 @@ from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import
 from src.drivers.conn import Conn
 import logging
 
+
 class ProcessEntities:
 
     def __init__(self, path) -> None:
         self.__path = path
-        self.__conn = Conn()
+
+        conn = Conn()
+        self.__conn = conn.connect()
 
     def run(self, entities):
         for files_path in entities.values():
@@ -26,7 +29,6 @@ class ProcessEntities:
         file_path_arr = file_path.split("/")
         model = file_path_arr[3].split(".")[3]
         entity_id = file_path_arr[1]
-
 
         if not model == 'orgao':
             return
