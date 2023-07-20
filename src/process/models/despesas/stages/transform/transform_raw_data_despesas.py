@@ -2,7 +2,7 @@ from typing import List, Dict
 import logging
 
 
-class TransformRawDataReceitas:
+class TransformRawDataDespesas:
     def transform(self, extract_data):
         logging.info('Transforma receitas')
 

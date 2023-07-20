@@ -1,4 +1,6 @@
 from src.process.models.despesas.stages.extract.extract_despesas import ExtractDespesas
+from src.process.models.despesas.stages.load.load_data_despesas import LoadDataDespesas
+from src.process.models.despesas.stages.transform.transform_raw_data_despesas import TransformRawDataDespesas
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
@@ -80,3 +82,9 @@ class ProcessEntities:
 
         extract_despesas = ExtractDespesas(self.__path, file_path, model, entity_id)
         extract_html_data = extract_despesas.extract()
+
+        transform_raw_data = TransformRawDataDespesas()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataDespesas(self.__conn)
+        load_data.load(transform_html_data, self.__year)
