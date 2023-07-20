@@ -27,11 +27,9 @@ class TransformRawDataPagamentosMovs:
             # format field date
             dat_emissao = str(row['dat_emissao'])
             dat_emissao_arr = dat_emissao.split('/')
-
             year = int(dat_emissao_arr[2])
             month = int(dat_emissao_arr[1])
             day = int(dat_emissao_arr[0])
-
             dat_emissao = datetime.date(year, month, day)
 
             dsc_inst_financeira = str(row['dsc_inst_financeira'])
