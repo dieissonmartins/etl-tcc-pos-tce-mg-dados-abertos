@@ -3,7 +3,7 @@ from datetime import datetime
 import logging
 
 
-class LoadDataReceitas:
+class LoadDataEmpenhos:
     def __init__(self, conn) -> None:
         self.__path = os.path.dirname(os.path.realpath(__file__))
         self.__conn = conn
