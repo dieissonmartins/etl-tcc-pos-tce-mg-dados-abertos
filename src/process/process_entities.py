@@ -4,6 +4,10 @@ from src.process.models.despesas.stages.transform.transform_raw_data_despesas im
 from src.process.models.empenhos.stages.extract.extract_empenhos import ExtractEmpenhos
 from src.process.models.empenhos.stages.load.load_data_empenhos import LoadDataEmpenhos
 from src.process.models.empenhos.stages.transform.transform_raw_data_empenhos import TransformRawDataEmpenhos
+from src.process.models.empenhos_fontes.stages.extract.extract_empenhos_fontes import ExtractEmpenhosFontes
+from src.process.models.empenhos_fontes.stages.load.load_data_empenhos_fontes import LoadDataEmpenhosFontes
+from src.process.models.empenhos_fontes.stages.transform.transform_raw_data_empenhos_fontes import \
+    TransformRawDataEmpenhosFontes
 from src.process.models.orgaos.stages.extract.extract_orgaos import ExtractOrgaos
 from src.process.models.orgaos.stages.load.load_data_orgaos import LoadDataOrgaos
 from src.process.models.orgaos.stages.transform.transform_raw_data_orgaos import TransformRawDataOrgaos
@@ -49,7 +53,10 @@ class ProcessEntities:
                 # self.pipeline_movimentacoes(file_path, model, entity_id)
 
                 # etl empenhos
-                self.pipeline_empenhos(file_path, model, entity_id)
+                # self.pipeline_empenhos(file_path, model, entity_id)
+
+                # etl empenhos fontes
+                self.pipeline_empenhos_fontes(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
@@ -132,4 +139,20 @@ class ProcessEntities:
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
         load_data = LoadDataEmpenhos(self.__conn)
+        load_data.load(transform_html_data, self.__year)
+
+    def pipeline_empenhos_fontes(self, file_path, model, entity_id):
+
+        if not model == 'empenhoFonte':
+            return
+
+        logging.info('Início processar: ' + model)
+
+        extract_empenhos = ExtractEmpenhosFontes(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_empenhos.extract()
+
+        transform_raw_data = TransformRawDataEmpenhosFontes()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataEmpenhosFontes(self.__conn)
         load_data.load(transform_html_data, self.__year)
