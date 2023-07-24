@@ -3,7 +3,7 @@ from typing import List, Dict
 import logging
 
 
-class TransformRawDataEmpenhos:
+class TransformRawDataEmpenhosFontes:
     def transform(self, extract_data):
         logging.info('Transforma empenhos fontes')
 
