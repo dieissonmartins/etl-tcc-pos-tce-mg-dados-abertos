@@ -1,6 +1,10 @@
 from src.process.models.despesas.stages.extract.extract_despesas import ExtractDespesas
 from src.process.models.despesas.stages.load.load_data_despesas import LoadDataDespesas
 from src.process.models.despesas.stages.transform.transform_raw_data_despesas import TransformRawDataDespesas
+from src.process.models.despesas_educacao.stages.extract.extract_despesas_educacao import ExtractDespesasEducacao
+from src.process.models.despesas_educacao.stages.load.load_data_despesas_educacao import LoadDataDespesasEducacao
+from src.process.models.despesas_educacao.stages.transform.transform_raw_data_despesas_educacao import \
+    TransformRawDataDespesasEducacao
 from src.process.models.empenhos.stages.extract.extract_empenhos import ExtractEmpenhos
 from src.process.models.empenhos.stages.load.load_data_empenhos import LoadDataEmpenhos
 from src.process.models.empenhos.stages.transform.transform_raw_data_empenhos import TransformRawDataEmpenhos
@@ -56,7 +60,10 @@ class ProcessEntities:
                 # self.pipeline_empenhos(file_path, model, entity_id)
 
                 # etl empenhos fontes
-                self.pipeline_empenhos_fontes(file_path, model, entity_id)
+                # self.pipeline_empenhos_fontes(file_path, model, entity_id)
+
+                # etl despesas educacao
+                self.pipeline_despesas_educacao(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
@@ -155,4 +162,20 @@ class ProcessEntities:
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
         load_data = LoadDataEmpenhosFontes(self.__conn)
+        load_data.load(transform_html_data, self.__year)
+
+    def pipeline_despesas_educacao(self, file_path, model, entity_id):
+
+        if not model == 'educacao':
+            return
+
+        logging.info('Início processar: ' + model)
+
+        extract_empenhos = ExtractDespesasEducacao(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_empenhos.extract()
+
+        transform_raw_data = TransformRawDataDespesasEducacao()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataDespesasEducacao(self.__conn)
         load_data.load(transform_html_data, self.__year)
