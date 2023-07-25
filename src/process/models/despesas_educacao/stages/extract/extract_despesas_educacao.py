@@ -30,6 +30,7 @@ class ExtractDespesasEducacao:
             "num_ano_referencia",
             "num_mes_referencia",
             "dsc_funcao",
+            "dsc_subfuncao",
             "dsc_programa",
             "dsc_acao",
             "dsc_subacao",
