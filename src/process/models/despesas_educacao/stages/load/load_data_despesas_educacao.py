@@ -40,6 +40,7 @@ class LoadDataDespesasEducacao:
         num_ano_referencia = row['num_ano_referencia']
         num_mes_referencia = row['num_mes_referencia']
         dsc_funcao = row['dsc_funcao']
+        dsc_subfuncao = row['dsc_subfuncao']
         dsc_programa = row['dsc_programa']
         dsc_acao = row['dsc_acao']
         dsc_subacao = row['dsc_subacao']
@@ -58,22 +59,22 @@ class LoadDataDespesasEducacao:
         vlr_anu_outras_baixas = row['vlr_anu_outras_baixas']
         vlr_rsp_proc = row['vlr_rsp_proc']
         vlr_rsp_nao_proc = row['vlr_rsp_nao_proc']
-        num_versao_arq = row['num_versaoarq']
+        num_versaoarq = row['num_versaoarq']
         created_at = datetime.now()
         updated_at = datetime.now()
 
-        query = "INSERT INTO despesas_educacao (cod_municipio seq_orgao, seq_unidade, num_ano_referencia, " \
-                "num_mes_referencia, dsc_funcao, dsc_programa, dsc_acao, dsc_subacao, dsc_nat_despesa, " \
+        query = "INSERT INTO despesas_educacao (cod_municipio, seq_orgao, seq_unidade, num_ano_referencia, " \
+                "num_mes_referencia, dsc_funcao, dsc_subfuncao, dsc_programa, dsc_acao, dsc_subacao, dsc_nat_despesa, " \
                 "dsc_fonte_recurso, num_empenho, dat_empenho, vlr_empenho, vlr_ref_empenho, vlr_anu_empenho, " \
                 "vlr_liquidado, vlr_anu_liquidado, vlr_pagamento, vlr_anu_pagamento, vlr_outras_baixas, " \
-                "vlr_anu_outras_baixas, vlr_rsp_proc, vlr_rsp_nao_proc, num_versao_arq, created_at, updated_at) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                "vlr_anu_outras_baixas, vlr_rsp_proc, vlr_rsp_nao_proc, num_versaoarq, created_at, updated_at) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         values = (
-            cod_municipio, seq_orgao, seq_unidade, num_ano_referencia, num_mes_referencia, dsc_funcao, dsc_programa,
+            cod_municipio, seq_orgao, seq_unidade, num_ano_referencia, num_mes_referencia, dsc_funcao, dsc_subfuncao, dsc_programa,
             dsc_acao, dsc_subacao, dsc_nat_despesa, dsc_fonte_recurso, num_empenho, dat_empenho, vlr_empenho,
             vlr_ref_empenho, vlr_anu_empenho, vlr_liquidado, vlr_anu_liquidado, vlr_pagamento, vlr_anu_pagamento,
-            vlr_outras_baixas, vlr_anu_outras_baixas, vlr_rsp_proc, vlr_rsp_nao_proc, num_versao_arq,
+            vlr_outras_baixas, vlr_anu_outras_baixas, vlr_rsp_proc, vlr_rsp_nao_proc, num_versaoarq,
             created_at, updated_at)
 
         cursor.execute(query, values)

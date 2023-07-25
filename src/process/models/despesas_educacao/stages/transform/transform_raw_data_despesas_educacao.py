@@ -20,6 +20,7 @@ class TransformRawDataDespesasEducacao:
             num_ano_referencia = int(row['num_ano_referencia'])
             num_mes_referencia = str(row['num_mes_referencia'])
             dsc_funcao = str(row['dsc_funcao'])
+            dsc_subfuncao = str(row['dsc_subfuncao'])
             dsc_programa = str(row['dsc_programa'])
             dsc_acao = str(row['dsc_acao'])
             dsc_subacao = str(row['dsc_subacao'])
@@ -46,7 +47,7 @@ class TransformRawDataDespesasEducacao:
             vlr_anu_outras_baixas = float(row['vlr_anu_outras_baixas'])
             vlr_rsp_proc = float(row['vlr_rsp_proc'])
             vlr_rsp_nao_proc = float(row['vlr_rsp_nao_proc'])
-            num_versaoarq = int(row['num_versaoarq'])
+            num_versaoarq = int(row['num_versao_arq'])
 
             row = {
                 'cod_municipio': cod_municipio,
@@ -55,6 +56,7 @@ class TransformRawDataDespesasEducacao:
                 'num_ano_referencia': num_ano_referencia,
                 'num_mes_referencia': num_mes_referencia,
                 'dsc_funcao': dsc_funcao,
+                'dsc_subfuncao': dsc_subfuncao,
                 'dsc_programa': dsc_programa,
                 'dsc_acao': dsc_acao,
                 'dsc_subacao': dsc_subacao,
