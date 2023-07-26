@@ -57,31 +57,31 @@ class ProcessEntities:
                 entity_id = file_path_arr[1]
 
                 # etl orgaos
-                # self.pipeline_orgaos(file_path, model, entity_id)
+                self.pipeline_orgaos(file_path, model, entity_id)
 
                 # etl receitas
-                # self.pipeline_receitas(file_path, model, entity_id)
+                self.pipeline_receitas(file_path, model, entity_id)
 
                 # etl despesas
-                # self.pipeline_despesas(file_path, model, entity_id)
+                self.pipeline_despesas(file_path, model, entity_id)
 
                 # etl movimentacoes
-                # self.pipeline_movimentacoes(file_path, model, entity_id)
+                self.pipeline_movimentacoes(file_path, model, entity_id)
 
                 # etl empenhos
-                # self.pipeline_empenhos(file_path, model, entity_id)
+                self.pipeline_empenhos(file_path, model, entity_id)
 
                 # etl empenhos fontes
-                # self.pipeline_empenhos_fontes(file_path, model, entity_id)
+                self.pipeline_empenhos_fontes(file_path, model, entity_id)
 
                 # etl despesas educacao
-                # self.pipeline_despesas_educacao(file_path, model, entity_id)
+                self.pipeline_despesas_educacao(file_path, model, entity_id)
 
                 # etl despesas pagamentos
-                # self.pipeline_despesas_pagamentos(file_path, model, entity_id)
+                self.pipeline_despesas_pagamentos(file_path, model, entity_id)
 
                 # etl despesas pessoas
-                # self.pipeline_despesas_pessoas(file_path, model, entity_id)
+                self.pipeline_despesas_pessoas(file_path, model, entity_id)
 
                 # etl despesas saude
                 self.pipeline_despesas_saude(file_path, model, entity_id)
