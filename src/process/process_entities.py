@@ -77,7 +77,7 @@ class ProcessEntities:
                 # self.pipeline_despesas_pagamentos(file_path, model, entity_id)
 
                 # etl despesas pessoas
-                self.pipeline_despesas_pessoas(file_path, model, entity_id)
+                # self.pipeline_despesas_pessoas(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
