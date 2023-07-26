@@ -32,7 +32,7 @@ class ExtractDespesasPessoas:
             'vlr_executivo',
             'vlr_legislativo',
             'vlr_municipio',
-            'num_versaoarq'
+            'num_versao_arq'
         ]
 
         df = pd.read_csv(file, header=0, names=col_names, sep=';')
