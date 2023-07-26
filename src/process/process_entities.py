@@ -6,8 +6,8 @@ from src.process.models.despesas_educacao.stages.load.load_data_despesas_educaca
 from src.process.models.despesas_educacao.stages.transform.transform_raw_data_despesas_educacao import \
     TransformRawDataDespesasEducacao
 from src.process.models.despesas_pagamentos.stages.extract.extract_despesas_pagamentos import ExtractDespesasPagamentos
-from src.process.models.despesas_pagamentos.stages.load.load_data_despesas_educacao import LoadDataDespesasPagamentos
-from src.process.models.despesas_pagamentos.stages.transform.transform_raw_data_despesas_educacao import \
+from src.process.models.despesas_pagamentos.stages.load.load_data_despesas_pagamentos import LoadDataDespesasPagamentos
+from src.process.models.despesas_pagamentos.stages.transform.transform_raw_data_despesas_pagamentos import \
     TransformRawDataDespesasPagamentos
 from src.process.models.despesas_pessoas.stages.extract.extract_despesas_pessoas import ExtractDespesasPessoas
 from src.process.models.despesas_pessoas.stages.load.load_data_despesas_pessoas import LoadDataDespesasPessoas
