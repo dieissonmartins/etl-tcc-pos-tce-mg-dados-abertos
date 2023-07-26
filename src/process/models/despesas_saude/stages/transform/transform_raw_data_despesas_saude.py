@@ -18,7 +18,7 @@ class TransformRawDataDespesasSaude:
             seq_unidade = str(row['seq_unidade'])
             num_ano_referencia = int(row['num_ano_referencia'])
             num_mes_referencia = int(row['num_mes_referencia'])
-            dsc_funcao = int(row['dsc_funcao'])
+            dsc_funcao = str(row['dsc_funcao'])
             dsc_subfuncao = str(row['dsc_subfuncao'])
             dsc_programa = str(row['dsc_programa'])
             dsc_acao = str(row['dsc_acao'])

@@ -13,6 +13,10 @@ from src.process.models.despesas_pessoas.stages.extract.extract_despesas_pessoas
 from src.process.models.despesas_pessoas.stages.load.load_data_despesas_pessoas import LoadDataDespesasPessoas
 from src.process.models.despesas_pessoas.stages.transform.transform_raw_data_despesas_pessoas import \
     TransformRawDataDespesasPessoas
+from src.process.models.despesas_saude.stages.extract.extract_despesas_saude import ExtractDespesasSaude
+from src.process.models.despesas_saude.stages.load.load_data_despesas_saude import LoadDataDespesasSaude
+from src.process.models.despesas_saude.stages.transform.transform_raw_data_despesas_saude import \
+    TransformRawDataDespesasSaude
 from src.process.models.empenhos.stages.extract.extract_empenhos import ExtractEmpenhos
 from src.process.models.empenhos.stages.load.load_data_empenhos import LoadDataEmpenhos
 from src.process.models.empenhos.stages.transform.transform_raw_data_empenhos import TransformRawDataEmpenhos
@@ -78,6 +82,9 @@ class ProcessEntities:
 
                 # etl despesas pessoas
                 # self.pipeline_despesas_pessoas(file_path, model, entity_id)
+
+                # etl despesas saude
+                self.pipeline_despesas_saude(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
@@ -224,4 +231,20 @@ class ProcessEntities:
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
         load_data = LoadDataDespesasPessoas(self.__conn)
+        load_data.load(transform_html_data, self.__year)
+
+    def pipeline_despesas_saude(self, file_path, model, entity_id):
+
+        if not model == 'saude':
+            return
+
+        logging.info('Início processar: ' + model)
+
+        extract_empenhos = ExtractDespesasSaude(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_empenhos.extract()
+
+        transform_raw_data = TransformRawDataDespesasSaude()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataDespesasSaude(self.__conn)
         load_data.load(transform_html_data, self.__year)

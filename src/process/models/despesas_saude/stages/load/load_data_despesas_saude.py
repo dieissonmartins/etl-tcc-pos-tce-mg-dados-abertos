@@ -63,7 +63,7 @@ class LoadDataDespesasSaude:
         created_at = datetime.now()
         updated_at = datetime.now()
 
-        query = "INSERT INTO despesas_pessoas (cod_municipio, seq_orgao, seq_unidade, num_ano_referencia, " \
+        query = "INSERT INTO despesas_saude (cod_municipio, seq_orgao, seq_unidade, num_ano_referencia, " \
                 "num_mes_referencia, dsc_funcao, dsc_subfuncao, dsc_programa, dsc_acao, dsc_subacao, dsc_nat_despesa," \
                 " dsc_fonte_recurso, num_empenho, dat_empenho, vlr_empenho, vlr_ref_empenho, vlr_anu_empenho, " \
                 "vlr_liquidado, vlr_anu_liquidado, vlr_pagamento, vlr_anu_pagamento, vlr_outras_baixas, " \
