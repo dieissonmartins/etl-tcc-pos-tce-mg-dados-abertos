@@ -9,6 +9,10 @@ from src.process.models.despesas_pagamentos.stages.extract.extract_despesas_paga
 from src.process.models.despesas_pagamentos.stages.load.load_data_despesas_educacao import LoadDataDespesasPagamentos
 from src.process.models.despesas_pagamentos.stages.transform.transform_raw_data_despesas_educacao import \
     TransformRawDataDespesasPagamentos
+from src.process.models.despesas_pessoas.stages.extract.extract_despesas_pessoas import ExtractDespesasPessoas
+from src.process.models.despesas_pessoas.stages.load.load_data_despesas_pessoas import LoadDataDespesasPessoas
+from src.process.models.despesas_pessoas.stages.transform.transform_raw_data_despesas_pessoas import \
+    TransformRawDataDespesasPessoas
 from src.process.models.empenhos.stages.extract.extract_empenhos import ExtractEmpenhos
 from src.process.models.empenhos.stages.load.load_data_empenhos import LoadDataEmpenhos
 from src.process.models.empenhos.stages.transform.transform_raw_data_empenhos import TransformRawDataEmpenhos
@@ -70,8 +74,10 @@ class ProcessEntities:
                 # self.pipeline_despesas_educacao(file_path, model, entity_id)
 
                 # etl despesas pagamentos
-                self.pipeline_despesas_pagamentos(file_path, model, entity_id)
+                # self.pipeline_despesas_pagamentos(file_path, model, entity_id)
 
+                # etl despesas pessoas
+                self.pipeline_despesas_pessoas(file_path, model, entity_id)
 
         # TODO: matar conn banco de dados
         # self.__conn.connect.close()
@@ -202,4 +208,20 @@ class ProcessEntities:
         transform_html_data = transform_raw_data.transform(extract_html_data)
 
         load_data = LoadDataDespesasPagamentos(self.__conn)
+        load_data.load(transform_html_data, self.__year)
+
+    def pipeline_despesas_pessoas(self, file_path, model, entity_id):
+
+        if not model == 'despPessoal':
+            return
+
+        logging.info('Início processar: ' + model)
+
+        extract_empenhos = ExtractDespesasPessoas(self.__path, file_path, model, entity_id)
+        extract_html_data = extract_empenhos.extract()
+
+        transform_raw_data = TransformRawDataDespesasPessoas()
+        transform_html_data = transform_raw_data.transform(extract_html_data)
+
+        load_data = LoadDataDespesasPessoas(self.__conn)
         load_data.load(transform_html_data, self.__year)

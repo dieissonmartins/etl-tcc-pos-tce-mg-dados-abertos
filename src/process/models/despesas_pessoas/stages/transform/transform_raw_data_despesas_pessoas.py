@@ -16,7 +16,7 @@ class TransformRawDataDespesasPessoas:
             cod_municipio = int(row['cod_municipio'])
             num_ano_referencia = int(row['num_ano_referencia'])
             num_mes_referencia = int(row['num_mes_referencia'])
-            cod_nat_despesa = int(row['cod_nat_despesa'])
+            cod_nat_despesa = str(row['cod_nat_despesa'])
             dsc_nat_despesa = str(row['dsc_nat_despesa'])
             vlr_executivo = float(row['vlr_executivo'])
             vlr_legislativo = float(row['vlr_legislativo'])

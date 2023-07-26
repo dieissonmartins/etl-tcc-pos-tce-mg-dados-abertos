@@ -48,7 +48,7 @@ class LoadDataDespesasPessoas:
 
         query = "INSERT INTO despesas_pessoas (cod_municipio, num_ano_referencia, num_mes_referencia, cod_nat_despesa, " \
                 "dsc_nat_despesa, vlr_executivo, vlr_legislativo, vlr_municipio, num_versaoarq, created_at, updated_at)" \
-                " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         values = (
             cod_municipio, num_ano_referencia, num_mes_referencia, cod_nat_despesa, dsc_nat_despesa, vlr_executivo,
