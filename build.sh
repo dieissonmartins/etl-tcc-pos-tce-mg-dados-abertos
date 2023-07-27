@@ -1,1 +1,1 @@
-docker-compose up -d --build
+docker build -t etl-tcc .
