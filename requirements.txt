@@ -1,5 +1,5 @@
 pandas
 python-dotenv
-mysql
+mysql-connector-python
 boto3
 zipfile36

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from typing import Dict, Any
 import boto3
@@ -39,9 +41,9 @@ class Storage(StorageInterface):
 
         return s3
 
-    def list_buckets(self) -> Dict[str, str | int]:
-        buckets = self.__storage.list_buckets()
-        return buckets
+    #def list_buckets(self) -> Dict[str, str | int]:
+    #    buckets = self.__storage.list_buckets()
+    #    return buckets
 
     def get_object(self, bucket, path) -> Any:
         try:

@@ -9,6 +9,6 @@ class StorageInterface(ABC):
     def connect(self) -> boto3:
         pass
 
-    @abstractmethod
-    def list_buckets(self) -> Dict[str, str | int]:
-        pass
+    #@abstractmethod
+    #def list_buckets(self) -> Dict[str, str | int]:
+    #    pass
